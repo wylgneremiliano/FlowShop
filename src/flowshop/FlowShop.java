@@ -92,14 +92,22 @@ public class FlowShop {
              for (int j = 0; j < NUMERO_TAREFAS; j++) {
                     permutacao[i][j] = vetorTempoTarefa[i][j] + resTmp;
                     resTmp = permutacao[i][j];
+                    
+                    
+          // Se já não estiver na primeira Linha, somo Informações com Linha Anterior          
              if (i!=0){
               permutacao[i][j] = permutacao[i-1][j]+vetorTempoTarefa[i][j];
-              
               resTmp = permutacao[i][j];
-             
+           
+           // Se já não estiver na primeira coluna, somo com a Coluna Anterior  
               if (j!=0){
-                  permutacao[i][j]=permutacao[i][j-1]+vetorTempoTarefa[i][j];
+                  if ((permutacao[i][j-1] + vetorTempoTarefa[i][j]) > (permutacao[i-1][j] + vetorTempoTarefa[i][j] )){
+                 permutacao[i][j]=permutacao[i][j-1]+vetorTempoTarefa[i][j];
                   resTmp = permutacao[i][j];
+                  }else {
+                  permutacao[i][j]=permutacao[i-1][j]+vetorTempoTarefa[i][j];
+                  resTmp = permutacao[i][j];
+                  }
               }
              }
            
