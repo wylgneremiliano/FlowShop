@@ -67,23 +67,7 @@ public class FlowShop {
 
     // Fun��o para calcular o makespan
     private static void calcularTempoProcessamento(int[][] permutacao, int[] resultados, int[][] vetorTempoTarefa) {
-        /* QUASE ALCANÇANDO RESULTADO ESPERADO -- DE BACKUP
-        // calculando o resultado
-        int resTmp = 0;
-         for (int i = 0; i < NUMERO_MAQUINAS; i++) {
-             for (int j = 0; j < NUMERO_TAREFAS; j++) {
-                    permutacao[i][j] = vetorTempoTarefa[i][j] + resTmp;
-                    resTmp = permutacao[i][j];
-             if (i!=0){
-              permutacao[i][j] = permutacao[i-1][j]+vetorTempoTarefa[i][j];
-              resTmp = permutacao[i][j];
-            }
-             }
-        resultados[i] = resTmp;     
-       }
-         */
-
-        // calculando o resultado
+      // calculando o resultado
         int resTmp = 0;
         for (int i = 0; i < NUMERO_MAQUINAS; i++) {
             for (int j = 0; j < NUMERO_TAREFAS; j++) {
