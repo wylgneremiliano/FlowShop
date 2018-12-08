@@ -13,7 +13,6 @@ import java.util.Scanner;
  */
 public class FlowShop {
     // Variavel global para definir o numero de MAQUINAS   
-
     public static int NUMERO_MAQUINAS = 0;
     //Variavel global para definir o tamanho de TAREFAS
     public static int NUMERO_TAREFAS = 0;
@@ -38,7 +37,8 @@ public class FlowShop {
         String[] nomeTarefas = {"Meia", "Cueca", "Lingerie", "Pijama"};
         String[] nomeMaquinas = {"Corte", "Costura", "Passadoria"};
 
-        int[] resultados = new int[NUMERO_MAQUINAS];
+        int[] tempoProcessamentoPorMaquina = new int[NUMERO_MAQUINAS];
+        int[] tempoProcessamentoPorTarefa = new int[NUMERO_TAREFAS];
 
         // Popula o vetor de maquinas com os Nomes Especificados
         for (int i = 0; i < NUMERO_MAQUINAS; i++) {
@@ -61,10 +61,12 @@ public class FlowShop {
         }
 
         // Chamo a Função para teste de Impressão
-        calcularTempoProcessamento(vetorTempoTarefa2, resultados, vetorTempoTarefa);
-        imprimir(vetorTempoTarefa, vetorTempoTarefa2, maquinas, tarefas, resultados);
+        calcularTempoProcessamento(vetorTempoTarefa2, tempoProcessamentoPorMaquina, vetorTempoTarefa);
+        imprimir(vetorTempoTarefa, vetorTempoTarefa2, maquinas, tarefas, tempoProcessamentoPorMaquina);
+        ordenarLPT(vetorTempoTarefa);
     }
 
+    
     // Fun��o para calcular o makespan
     private static void calcularTempoProcessamento(int[][] permutacao, int[] resultados, int[][] vetorTempoTarefa) {
       // calculando o resultado
@@ -101,6 +103,45 @@ public class FlowShop {
         }
     }
 
+ //Função para calcular o tempo de Processamentos das Tarefas
+     private static void ordenarLPT(int[][] vetorTempoTarefa) {
+        int k=0;
+        int resTmp=0;
+        int [] vetorTempoTarefaOrdenado = new int[NUMERO_TAREFAS];
+        int [][] mediaTemposProcessamentoEPosicao = new int[2][NUMERO_TAREFAS];
+        for (int i = 0; i < NUMERO_TAREFAS; i++) {
+            for (int j = 0; j < NUMERO_MAQUINAS; j++) {
+              resTmp = resTmp + vetorTempoTarefa[j][i];
+            }
+        mediaTemposProcessamentoEPosicao[0][k] = (resTmp/NUMERO_MAQUINAS);
+        mediaTemposProcessamentoEPosicao[1][k] = i;
+        resTmp=0;
+        k++;
+        }
+        
+        
+        System.out.println("Medias e Posição");
+        for (int i=0; i<NUMERO_TAREFAS;i++){
+            System.out.println(" "+mediaTemposProcessamentoEPosicao[0][i]);
+                    }
+        
+         for (int i=0; i<NUMERO_TAREFAS;i++){
+            System.out.println(" "+mediaTemposProcessamentoEPosicao[1][i]);
+        }
+     }
+    
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+    
+    // Função de Impressão
     private static void imprimir(int[][] vetorTempoTarefa, int[][] vetorPermutacao, String[] maquinas, String[] tarefas, int[] resultados) {
         int i;
         for (i = 0; i < NUMERO_MAQUINAS; i++) {
